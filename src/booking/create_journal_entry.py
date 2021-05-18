@@ -178,16 +178,9 @@ def verified_input(prompt: Any, verifier: Callable[[str], bool]) -> str:
     return i
 
 
-def verifiy_default(prompt: Any,
-                    verifier: Callable[[str], bool],
-                    default: Any) -> str:
-    """ verified_input but with a deafult. """
-    return (verified_input(prompt, verifier) or default)
-
-
 def default_input(prompt: Any, default: Any) -> str:
-    """ verify_default, but just assumes it is valid. """
-    return verifiy_default(prompt, lambda x: True, default)
+    """ Input, but with a default argument. """
+    return (input(prompt) or default)
 
 
 def read_journal(filename: str, path: str) -> str:
