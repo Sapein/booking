@@ -109,7 +109,7 @@ def parse_journal(journal: list[str]) -> Journal:
     """ Paarses the Journal from a list of strings representing a file
     split by newlines. """
     nameline, pageline, *journal = journal
-    page_number: int = int(pageline.lower().split(" ")[1])
+    page_number = int(pageline.lower().split(" ")[1])
 
     try:
         name, abbr = nameline.split(' - ')
@@ -159,7 +159,7 @@ def parse_entry(line: str) -> Journal_Entry:
 def parse_entry_optionals(line: str) -> tuple[Optional[int], Optional[str]]:
     """ Parses the optional parts of an entry
     (Description and Post Reference). """
-    pr: Optional[Union[int, str]] = None
+    pr: Optional[int] = None
     desc: Optional[str] = None
     if "Pr:" in line:
         pr = int(line.split("Pr: ")[1].split(" ")[0])
@@ -167,7 +167,7 @@ def parse_entry_optionals(line: str) -> tuple[Optional[int], Optional[str]]:
         desc = line.split("Description: ")[1]
         if pr and "Pr: {}".format(pr) in desc:
             desc = desc.split("Pr: {}".format(pr))[0]
-    return cast(Optional[int], pr), desc
+    return pr, desc
 
 
 def verified_input(prompt: Any, verifier: Callable[[str], bool]) -> str:
